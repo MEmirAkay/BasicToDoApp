@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>To Do App</title>
+    <style>
+        #footer {
+            height: 100px;
+        }
+
+        .b_ground {
+            background: linear-gradient(#012736, #01435e, #0276a3, #049dda);
+        }
+
+        .swipe_right {
+            margin-left: 0;
+        }
+
+        .swipe_left {
+            margin-right: 0;
+        }
+
+
+        .hr_color {
+            border-top: 1px solid white;
+
+        }
+
+        .trans--grow {
+            -webkit-transition: width 1s ease-out;
+            transition: width 1s ease-out;
+            width: 0%;
+        }
+
+        .grow {
+            width: 100%;
+        }
+
+       
+
+        .table--show{
+            transition: visibility 3s ease-out;
+            -webkit-transition: visibility 3s ease-out;
+            visibility: 0;
+        }
+
+        .show{
+            visibility: 1;
+        }
+
+
+    </style>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+
+        jQuery(document).ready(function ($) {
+            setTimeout(function () {
+                $('.trans--grow').addClass('grow');
+            }, 275);
+        });
+
+        
+    </script>
+
+</head>
+
+
+
+<body class="b_ground text-light d-flex ">
+
+    <div class="container  col-md-10">
+
+        <h1 class="text-center" style="padding-top: 50px;">TO DO APP</h1>
+
+        <hr class="hr_color trans--grow">
+
+        <form action="/add" method="POST">
+
+            <div class="form-group row text-center">
+                <div class="col-md-2">
+                    <input type="text" name="title" class="form-control" id="title" placeholder="Başlık">
+                </div>
+                <div class="col-md-8">
+                    <input type="text" name="detail" class="form-control" id="detail" placeholder="Görev Ayrıntı">
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary col-md-12">Ekle</button>
+                </div>
+            </div>
+
+        </form>
+
+        <br>
+        <!-- To DO list -->
+        <h2 class="h2">To Do List</h2>
+        <hr class="hr_color hr2 trans--grow">
+
+        {% if todos == [] %}
+        <div>
+            <p class="h5">Herhangi bir görev yok veya hepsi tamamlandı...</p>
+        </div>
+        {% else %}
+        <table class="table table-hover text-light table--show">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Başlık</th>
+                <th scope="col">Ayrıntı</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for todo in todos %}
+              <tr>
+                <th scope="row">{{todo.id}}</th>
+                <td>{{todo.title}}</td>
+                <td>{{todo.detail}}</td>
+                <td><a href="/complete/{{todo.id}}" class="btn btn-success">Tamamla</td>
+              </tr>
+              {% endfor %}
+              
+            </tbody>
+          </table>
+        {% endif %}
+
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </div>
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
